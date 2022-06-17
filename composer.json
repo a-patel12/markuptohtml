@@ -1,0 +1,22 @@
+{
+    "name": "apatel/mail-chimp",
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Apatel\\MailChimp\\": "src/"
+        }
+    },
+    "archive": {
+        "exclude": [
+            "!vendor/*"
+        ]
+    },
+    "authors": [
+        {
+            "name": "a patel",
+            "email": "5598313+a-patel12@users.noreply.github.com"
+        }
+    ]
+}
