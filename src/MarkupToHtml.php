@@ -3,19 +3,29 @@ namespace Apatel\MailChimp;
 
 class MarkupToHtml{
 
-    // predefined tag types to process
+    /**
+     * @var string[] predefined tag types to process
+     */
     private $tagTypes = [
         '#' => 'Header',
         '[' => 'Link',
         ']' => 'Link',
     ];
 
+    /**
+     * @param $text
+     * @return array|string|string[]
+     */
     public function convertToHtml($text){
 
         $textLines = $this->textLines($text); // creates lines array
         return $this->convertToTags($textLines);
     }
 
+    /**
+     * @param $text
+     * @return false|string[]
+     */
     public function textLines($text)
     {
        // remove extra lines from both sides
@@ -23,9 +33,13 @@ class MarkupToHtml{
        // convert line breaks chars to unified \n
        $text = str_replace(["\r\n", "\r"], "\n", $text);
 
-        return explode("\n", $text);
+       return explode("\n", $text);
     }
 
+    /**
+     * @param array $textLines
+     * @return array|string|string[]
+     */
     public function convertToTags(array $textLines){
         if(count($textLines) > 0){
             $markup_to_html = "";
@@ -68,6 +82,11 @@ class MarkupToHtml{
 
     }
 
+    /**
+     * @param $element_type
+     * @param $line
+     * @return string
+     */
     protected function appliedHtml($element_type, $line){
         $converted_line = "";
         if($element_type == 'Header'){
@@ -79,10 +98,18 @@ class MarkupToHtml{
         return $converted_line;
     }
 
+    /**
+     * @param $line
+     * @return string
+     */
     protected function addParagraph($line){
         return "<p>". $line ."</p>";
     }
 
+    /**
+     * @param $line
+     * @return string
+     */
     protected function generateHeader($line){
         $line_length = strlen($line);
         $hcount = 0;
@@ -106,6 +133,10 @@ class MarkupToHtml{
         return $converted_line;
     }
 
+    /**
+     * @param $line
+     * @return array|string|string[]
+     */
     protected function generateLink($line){
         $linktitle_exist = strpos($line,'[') !== false && strpos($line,']') !== false;
         $linkurl_exist = strpos($line,'(') !== false && strpos($line,')') !== false;
